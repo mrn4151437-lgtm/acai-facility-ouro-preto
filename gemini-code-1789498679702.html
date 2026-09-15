@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Açaí Facility | Ouro Preto - MG</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Ícones Phosphor -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    :root {
+      --bg-dark: #07040a;
+      --surface-1: #120a1c;
+      --surface-2: #1c102b;
+      --surface-glass: rgba(255, 255, 255, 0.03);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      
+      --purple-primary: #8b5cf6;
+      --purple-glow: #a855f7;
+      --purple-accent: #6d28d9;
+      --emerald-accent: #10b981;
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* BACKGROUND GLOW EFFECTS */
+    .glow-bg {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .glow-1 { top: -100px; left: -100px; }
+    .glow-2 { bottom: 10%; right: -100px; background: radial-gradient(circle, rgba(109, 40, 217, 0.15) 0%, rgba(0,0,0,0) 70%); }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(7, 4, 10, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-glass);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-items a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-items a:hover {
+      color: var(--text-primary);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 160px 24px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--emerald-accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald-accent);
+      box-shadow: 0 0 8px var(--emerald-accent);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #A0AEC0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-primary), var(--purple-accent));
+      color: #fff;
+      box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
+    }
+
+    .btn-secondary {
+      background: var(--surface-glass);
+      color: var(--text-primary);
+      border: 1px solid var(--border-glass);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* CARD VIRTUAL FISCAL */
+    .company-card-hero {
+      background: linear-gradient(145deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .company-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* SEÇÕES COM GLASSMORPHISM */
+    .section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .glass-card {
+      background: var(--surface-glass);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(168, 85, 247, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--purple-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .data-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .data-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .data-item:last-child {
+      border: none;
+      padding-bottom: 0;
+    }
+
+    .data-item .key {
+      color: var(--text-secondary);
+    }
+
+    .data-item .value {
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    /* MAP / LOCALIZAÇÃO DESTAQUE */
+    .location-banner {
+      background: linear-gradient(135deg, var(--surface-2), var(--bg-dark));
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .location-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .location-info p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 40px 24px;
+      margin-top: 60px;
+      background: var(--bg-dark);
+    }
+
+    .footer-flex {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .nav-items { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a href="#" class="brand">
+        <div class="brand-logo">
+          <i class="ph-bold ph-bowl-food"></i>
+        </div>
+        <div>
+          <div class="brand-title">Açaí Facility</div>
+          <div class="brand-subtitle">Acai Facility LTDA</div>
+        </div>
+      </a>
+      <ul class="nav-items">
+        <li><a href="#empresa">Institucional</a></li>
+        <li><a href="#fiscal">Dados Fiscais</a></li>
+        <li><a href="#localizacao">Endereço</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div>
+      <div class="badge">
+        <div class="badge-dot"></div>
+        EMPRESA REGULAR — SIMPLES NACIONAL
+      </div>
+      <h1>Açaí de Alta Qualidade em Ouro Preto</h1>
+      <p class="hero-description">
+        Sabor inigualável, cremosidade única e rigor técnico no preparo. Atendendo com excelência no bairro Bauxita.
+      </p>
+      <div class="cta-group">
+        <a href="https://wa.me/5531998000000" target="_blank" class="btn btn-primary">
+          <i class="ph-bold ph-whatsapp-logo"></i> Fazer Pedido
+        </a>
+        <a href="#fiscal" class="btn btn-secondary">
+          <i class="ph-bold ph-certificate"></i> Informações do CNPJ
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD VIRTUAL COM DADOS DE DESTAQUE -->
+    <div class="company-card-hero">
+      <div class="company-card-header">
+        <div>
+          <div class="card-label">Razão Social</div>
+          <div class="card-val">Acai Facility LTDA</div>
+        </div>
+        <i class="ph-duotone ph-shield-check" style="font-size: 2rem; color: var(--purple-glow);"></i>
+      </div>
+      <div class="card-grid">
+        <div>
+          <div class="card-label">CNPJ</div>
+          <div class="card-val">45.360.190/0001-96</div>
+        </div>
+        <div>
+          <div class="card-label">Inscrição Estadual</div>
+          <div class="card-val">004274490.00-87</div>
+        </div>
+        <div style="margin-top: 12px;">
+          <div class="card-label">Município</div>
+          <div class="card-val">Ouro Preto / MG</div>
+        </div>
+        <div style="margin-top: 12px;">
+          <div class="card-label">Situação Cadastral</div>
+          <div class="card-val" style="color: var(--emerald-accent);">ATIVA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMAÇÕES CORPORATIVAS / FISCAIS -->
+  <section class="section" id="fiscal">
+    <div class="section-title">Transparência & Registro</div>
+    <div class="section-subtitle">Dados cadastrais oficiais e informações societárias consolidadas.</div>
+
+    <div class="grid-3">
+      <!-- CARD 1 -->
+      <div class="glass-card">
+        <div class="card-icon"><i class="ph-bold ph-buildings"></i></div>
+        <h3 style="margin-bottom: 20px;">Dados Empresariais</h3>
+        <div class="data-list">
+          <div class="data-item">
+            <span class="key">Razão Social</span>
+            <span class="value">Acai Facility LTDA</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Nome Fantasia</span>
+            <span class="value">Acai Facility</span>
+          </div>
+          <div class="data-item">
+            <span class="key">CNPJ</span>
+            <span class="value">45.360.190/0001-96</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Inscrição Estadual</span>
+            <span class="value">004274490.00-87</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Data de Abertura</span>
+            <span class="value">18/02/2022</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="glass-card">
+        <div class="card-icon"><i class="ph-bold ph-scales"></i></div>
+        <h3 style="margin-bottom: 20px;">Regime & Estrutura</h3>
+        <div class="data-list">
+          <div class="data-item">
+            <span class="key">Natureza Jurídica</span>
+            <span class="value">Sociedade Limitada</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Porte</span>
+            <span class="value">Micro Empresa (ME)</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Opção pelo Simples</span>
+            <span class="value">Sim (Desde 18/02/2022)</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Capital Social</span>
+            <span class="value">R$ 15.000,00</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Tipo de Estabelecimento</span>
+            <span class="value">Matriz</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="glass-card">
+        <div class="card-icon"><i class="ph-bold ph-map-pin-line"></i></div>
+        <h3 style="margin-bottom: 20px;">Sede Operacional</h3>
+        <div class="data-list">
+          <div class="data-item">
+            <span class="key">Logradouro</span>
+            <span class="value">Tr. Sebastiana D. Medeiros, 269</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Complemento</span>
+            <span class="value">Ponto Comercial Apt 5</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Bairro</span>
+            <span class="value">Bauxita</span>
+          </div>
+          <div class="data-item">
+            <span class="key">CEP</span>
+            <span class="value">35402-239</span>
+          </div>
+          <div class="data-item">
+            <span class="key">Cidade / Estado</span>
+            <span class="value">Ouro Preto / MG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER LOCALIZAÇÃO -->
+  <section class="section" id="localizacao">
+    <div class="location-banner">
+      <div class="location-info">
+        <h3>Venha nos visitar ou peça Delivery</h3>
+        <p>Travessa Sebastiana Dias de Medeiros, 269 - Bauxita, Ouro Preto - MG</p>
+      </div>
+      <a href="https://maps.google.com" target="_blank" class="btn btn-secondary">
+        <i class="ph-bold ph-navigation-arrow"></i> Ver no Google Maps
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-flex">
+      <div>
+        <strong>Acai Facility LTDA</strong> — CNPJ 45.360.190/0001-96
+      </div>
+      <div>
+        © 2026 Acai Facility. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
